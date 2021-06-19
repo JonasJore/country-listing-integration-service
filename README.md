@@ -1,5 +1,5 @@
 # Welcome! 
-This is the country-listing restcountries.eu/v2 integration-service 
+This is the country-listing restcountries.eu/v2 wrapper-service 
 which gets all countries from the `restcountries.eu/rest/v2/all` endpoint,
 list all the countries sorting the results in ascending order based on either `name`, `region`,
 `population` or `area`, choosing to sort by `space` will make the program not sort by any order, just the order the 
