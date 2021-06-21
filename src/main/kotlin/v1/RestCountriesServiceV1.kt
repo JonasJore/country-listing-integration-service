@@ -6,30 +6,32 @@ import v1.domain.RegionV1
 import v1.dto.CountryDtoV1
 import java.text.DecimalFormat
 
-class RestCountriesServiceV1(restCountriesAdapterV1: RestCountriesAdapterV1) {
+const val ONE_SQUARE_MILE: Double = 0.386102
+const val ONE_MILLION: Double = 1000000.0
 
+class RestCountriesServiceV1(restCountriesAdapterV1: RestCountriesAdapterV1) : IRestCountriesServiceV1 {
   private val restCountriesList: List<CountryV1> = restCountriesAdapterV1.getCountriesFromRestCountriesEndpoint()
     .map { it.toCountryObject() }
 
-  fun getAllCountries(inputType: InputTypeV1): List<CountryV1> {
+  override fun getAllCountries(inputType: InputTypeV1): List<CountryV1> {
     return restCountriesList
       .sortedBy {
         it.sortByInputType(inputType)
       }
   }
 
-  fun getCountrySmallestArea(): CountryV1? {
+  override fun getCountrySmallestArea(): CountryV1? {
     return restCountriesList
       .filter { it.area > 0 }
       .minByOrNull { it.area }
   }
 
-  fun getCountryWithBiggestArea(): CountryV1? {
+  override fun getCountryWithBiggestArea(): CountryV1? {
     return restCountriesList
       .maxByOrNull { it.area }
   }
 
-  fun getPopulationAverageFromAllCountries(): Double {
+  override fun getPopulationAverageFromAllCountries(): Double {
     return restCountriesList
       .map { it.population }.average()
       .toLong()
@@ -65,6 +67,3 @@ class RestCountriesServiceV1(restCountriesAdapterV1: RestCountriesAdapterV1) {
     InputTypeV1.NO_INPUT -> null
   }
 }
-const val ONE_SQUARE_MILE: Double = 0.386102
-const val ONE_MILLION: Double = 1000000.0
-

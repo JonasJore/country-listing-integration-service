@@ -8,14 +8,14 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 
-class RestCountriesAdapterV1 {
+class RestCountriesAdapterV1: IRestCountriesAdapterV1 {
   companion object {
     val client: HttpClient = HttpClient.newHttpClient()
     const val REST_COUNTRIES_API_ROUTE_V1: String = "https://restcountries.eu/rest/v2/all"
     const val CONTENT_TYPE_JSON = "application/json"
   }
 
-  fun getCountriesFromRestCountriesEndpoint(): List<CountryDtoV1> {
+  override fun getCountriesFromRestCountriesEndpoint(): List<CountryDtoV1> {
     return HttpRequest.newBuilder()
       .uri(URI.create(REST_COUNTRIES_API_ROUTE_V1))
       .version(HttpClient.Version.HTTP_2)
