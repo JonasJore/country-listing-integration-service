@@ -1,5 +1,6 @@
 import v1.RestCountriesAdapterV1
 import v1.RestCountriesServiceV1
+import v1.domain.CountryV1
 import v1.domain.InputTypeV1
 import java.util.*
 
@@ -7,16 +8,16 @@ fun main() {
   println("Welcome to the integration-service for countries distributed by Restcountries.eu!")
   println("How would you like the list of countries to be sorted?\n")
 
-  val inputValue = Scanner(System.`in`).nextLine().trim()
-  val inputType = InputTypeV1.fromValue(inputValue)
+  val inputValue: String = Scanner(System.`in`).nextLine().trim()
+  val inputType: InputTypeV1 = InputTypeV1.fromValue(inputValue)
 
   val restCountriesAdapterV1 = RestCountriesAdapterV1()
   val restCountriesServiceV1 = RestCountriesServiceV1(restCountriesAdapterV1)
 
-  val countries = restCountriesServiceV1.getAllCountries(inputType)
-  val populationAverageForAllCountries = restCountriesServiceV1.getPopulationAverageFromAllCountries()
-  val countrySmallestArea = restCountriesServiceV1.getCountrySmallestArea()
-  val countryBiggestArea = restCountriesServiceV1.getCountryWithBiggestArea()
+  val countries: List<CountryV1> = restCountriesServiceV1.getAllCountries(inputType)
+  val populationAverageForAllCountries: Double = restCountriesServiceV1.getPopulationAverageFromAllCountries()
+  val countrySmallestArea: CountryV1? = restCountriesServiceV1.getCountrySmallestArea()
+  val countryBiggestArea: CountryV1? = restCountriesServiceV1.getCountryWithBiggestArea()
 
   println("Sorting by: $inputType")
   countries.forEach { country ->
