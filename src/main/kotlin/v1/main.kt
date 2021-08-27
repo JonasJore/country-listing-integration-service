@@ -1,8 +1,8 @@
-import v1.RestCountriesAdapterV1
-import v1.RestCountriesServiceV1
+package v1
+
 import v1.domain.CountryV1
 import v1.domain.InputTypeV1
-import java.util.*
+import java.util.Scanner
 
 fun main() {
   println("Welcome to the integration-service for countries distributed by Restcountries.eu!")
